@@ -12,8 +12,10 @@ describe("QueryBuilder", function () {
             var qb = new QueryBuilder().eq("id", 1);
 
             expect(qb.getFields()).to.deep.equal([{
-                id: 1,
-                operator: 'eq'
+                operator: 'eq',
+                field: {
+                    id: 1
+                }
             }]);
         });
     });
@@ -23,8 +25,10 @@ describe("QueryBuilder", function () {
             var qb = new QueryBuilder().gt("id", 4);
 
             expect(qb.getFields()).to.deep.equal([{
-                id: 4,
-                operator: 'gt'
+                operator: 'gt',
+                field: {
+                    id: 4
+                }
             }]);
         });
     });
@@ -34,8 +38,10 @@ describe("QueryBuilder", function () {
             var qb = new QueryBuilder().in("id", [1, 2, 3]);
 
             expect(qb.getFields()).to.deep.equal([{
-                id: [1, 2, 3],
-                operator: 'in'
+                operator: 'in',
+                field: {
+                    id: [1, 2, 3]
+                }
             }]);
         });
     });
