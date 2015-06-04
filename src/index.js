@@ -1,6 +1,9 @@
 function QueryBuilder() {
     this._dataset = null;
     this._fields = [];
+
+    if (!(this instanceof QueryBuilder))
+        return new QueryBuilder();
 }
 
 QueryBuilder.prototype._operatorGenerate = function (operator, field, value) {
@@ -74,6 +77,6 @@ QueryBuilder.prototype.toString = function () {
     if (this._dataset) query = this._dataset;
     if (this._dataset && temp.length) query = query + "?";
     query = query + temp.join("&");
-    
+
     return query;
 };

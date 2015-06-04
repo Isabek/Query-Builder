@@ -4,7 +4,11 @@ describe("QueryBuilder", function () {
     describe("constructor", function () {
         it("should create instance", function () {
             new QueryBuilder();
-        })
+        });
+
+        it("should create instance without new operator", function () {
+            expect(QueryBuilder()).to.be.an.instanceof(QueryBuilder);
+        });
     });
 
     describe("#eq", function () {
