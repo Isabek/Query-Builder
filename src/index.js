@@ -65,6 +65,19 @@ QueryBuilder.prototype.lt = function (field, value) {
     return this;
 };
 
+QueryBuilder.prototype.gte = function (field, value) {
+    this._fields.push(this._operatorGenerate("gte", field, value));
+
+    return this;
+};
+
+QueryBuilder.prototype.lte = function (field, value) {
+    this._fields.push(this._operatorGenerate("lte", field, value));
+
+    return this;
+};
+
+
 QueryBuilder.prototype.in = function (field, values) {
     this._fields.push(this._operatorGenerate("in", field, values));
 

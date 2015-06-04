@@ -50,6 +50,32 @@ describe("QueryBuilder", function () {
         });
     });
 
+    describe("#gte", function () {
+        it("should add new field with value", function () {
+            var qb = new QueryBuilder().gte("id", 4);
+
+            expect(qb.getFields()).to.deep.equal([{
+                operator: 'gte',
+                field: {
+                    id: 4
+                }
+            }]);
+        });
+    });
+
+    describe("#lte", function () {
+        it("should add new field with value", function () {
+            var qb = new QueryBuilder().lte("id", 10);
+
+            expect(qb.getFields()).to.deep.equal([{
+                operator: 'lte',
+                field: {
+                    id: 10
+                }
+            }]);
+        });
+    });
+
     describe("#in", function () {
         it("should add new field with value", function () {
             var qb = new QueryBuilder().in("id", [1, 2, 3]);
