@@ -12,6 +12,28 @@ QueryBuilder.prototype._operatorGenerate = function (operator, field, value) {
     };
 };
 
+QueryBuilder.prototype._getFieldKey = function (obj) {
+    return Object.keys(obj.field)[0];
+};
+
+QueryBuilder.prototype._getFieldValue = function (obj) {
+    return obj.field[this._getFieldKey(obj)];
+};
+
+QueryBuilder.prototype._fieldValuesToString = function (obj) {
+    var value = this._getFieldValue(obj);
+
+    if (value instanceof Array) {
+        value = value.join(",");
+    }
+
+    return value;
+};
+
+QueryBuilder.prototype._fieldToString = function (obj) {
+    return this._getFieldKey(obj) + "=" + obj.operator + "." + this._fieldValuesToString(obj);
+};
+
 QueryBuilder.prototype.getFields = function () {
     return this._fields;
 };
@@ -35,5 +57,12 @@ QueryBuilder.prototype.in = function (field, values) {
 };
 
 QueryBuilder.prototype.toString = function () {
-    return "";
+
+    var temp = [];
+
+    this.getFields().reduce(function (prev, curr) {
+        temp.push(this._fieldToString(curr));
+    }.bind(this), {});
+
+    return temp.join("&");
 };

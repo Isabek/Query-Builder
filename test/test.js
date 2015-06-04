@@ -51,5 +51,20 @@ describe("QueryBuilder", function () {
             var qb = new QueryBuilder().toString();
             expect(qb).to.equal("");
         });
+
+        it("should return 'id=eq.1'", function () {
+            var q = new QueryBuilder().eq("id", 1).toString();
+            expect(q).to.equal("id=eq.1");
+        });
+
+        it("should return 'id=in.1,2,3'", function () {
+            var q = new QueryBuilder().in("id", [1,2,3]).toString();
+            expect(q).to.equal("id=in.1,2,3");
+        });
+
+        it("should return 'id=eq.5&points=gt.12'", function () {
+            var q = new QueryBuilder().eq("id", 5).gt("points", 12).toString();
+            expect(q).to.equal("id=eq.5&points=gt.12");
+        });
     });
 });
