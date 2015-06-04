@@ -1,4 +1,5 @@
 function QueryBuilder() {
+    this._dataset = null;
     this._fields = [];
 }
 
@@ -38,6 +39,11 @@ QueryBuilder.prototype.getFields = function () {
     return this._fields;
 };
 
+QueryBuilder.prototype.from = function (dataset) {
+    this._dataset = dataset;
+    return this;
+};
+
 QueryBuilder.prototype.eq = function (field, value) {
     this._fields.push(this._operatorGenerate("eq", field, value));
 
@@ -64,5 +70,10 @@ QueryBuilder.prototype.toString = function () {
         temp.push(this._fieldToString(curr));
     }.bind(this), {});
 
-    return temp.join("&");
+    var query = "";
+    if (this._dataset) query = this._dataset;
+    if (this._dataset && temp.length) query = query + "?";
+    query = query + temp.join("&");
+    
+    return query;
 };
