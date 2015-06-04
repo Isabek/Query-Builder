@@ -37,6 +37,19 @@ describe("QueryBuilder", function () {
         });
     });
 
+    describe("#lt", function () {
+        it("should add new field with value", function () {
+            var qb = new QueryBuilder().lt("id", 10);
+
+            expect(qb.getFields()).to.deep.equal([{
+                operator: 'lt',
+                field: {
+                    id: 10
+                }
+            }]);
+        });
+    });
+
     describe("#in", function () {
         it("should add new field with value", function () {
             var qb = new QueryBuilder().in("id", [1, 2, 3]);
