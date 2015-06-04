@@ -89,6 +89,20 @@ describe("QueryBuilder", function () {
         });
     });
 
+
+    describe("#neq", function () {
+        it("should add new field with value", function () {
+            var qb = new QueryBuilder().neq("id", 1);
+
+            expect(qb.getFields()).to.deep.equal([{
+                operator: 'neq',
+                field: {
+                    id: 1
+                }
+            }]);
+        });
+    });
+
     describe("#toString", function () {
         it("should return empty string", function () {
             var qb = new QueryBuilder().toString();

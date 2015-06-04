@@ -77,6 +77,11 @@ QueryBuilder.prototype.lte = function (field, value) {
     return this;
 };
 
+QueryBuilder.prototype.neq = function (field, value) {
+    this._fields.push(this._operatorGenerate("neq", field, value));
+
+    return this;
+};
 
 QueryBuilder.prototype.in = function (field, values) {
     this._fields.push(this._operatorGenerate("in", field, values));
