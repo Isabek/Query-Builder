@@ -18,7 +18,7 @@ var qb = QueryBuilder();
 Function that selects a `dataset`
 
 ```js
-QueryBuilder().from([dataset])
+QueryBuilder().from(dataset)
 
 Example
 
@@ -30,7 +30,7 @@ QueryBuilder().from("school")
 ### eq
 
 ```js
-QueryBuilder().eq([field], value)
+QueryBuilder().eq(field, value)
 
 Example
 
@@ -41,7 +41,7 @@ QueryBuilder().eq("id", 1)
 ### gt
 
 ```js
-QueryBuilder().gt([field], value)
+QueryBuilder().gt(field, value)
 
 Example
 
@@ -52,7 +52,7 @@ QueryBuilder().gt("points", 10)
 ### lt
 
 ```js
-QueryBuilder().lt([field], value)
+QueryBuilder().lt(field, value)
 
 Example
 
@@ -63,7 +63,7 @@ QueryBuilder().lt("points", 10)
 ### gte
 
 ```js
-QueryBuilder().gte([field], value)
+QueryBuilder().gte(field, value)
 
 Example
 
@@ -74,7 +74,7 @@ QueryBuilder().gte("points", 10)
 ### lte
 
 ```js
-QueryBuilder().lte([field], value)
+QueryBuilder().lte(field, value)
 
 Example
 
@@ -85,7 +85,7 @@ QueryBuilder().lte("points", 10)
 ### neq
 
 ```js
-QueryBuilder().neq([field], value)
+QueryBuilder().neq(field, value)
 
 Example
 
@@ -96,66 +96,78 @@ QueryBuilder().neq("id", 10)
 ### in
 
 ```js
-QueryBuilder().in([field], values)
+QueryBuilder().in(field, values)
 
 Example
 
 QueryBuilder().in("id", [1,2,3,4])
+
+`values` should be an array
 
 ```
 
 ### is
 
 ```js
-QueryBuilder().is([field], value[true, false, null])
+QueryBuilder().is(field, value)
 
 Example
 
 QueryBuilder().is("active", true)
+
+`value` can be true, false, null
 
 ```
 
 ### isnot
 
 ```js
-QueryBuilder().isnot([field], value[true, false, null])
+QueryBuilder().isnot(field, value)
 
 Example
 
 QueryBuilder().isnot("active", true)
+
+`value` can be true, false, null
 
 ```
 
 ### like
 
 ```js
-QueryBuilder().like([field], value)
+QueryBuilder().like(field, value)
 
 Example
 
 QueryBuilder().like("title", "%Hackathon")
+
+`value` can be %value%, %value, value%
 
 ```
 
 ### ilike
 
 ```js
-QueryBuilder().ilike([field], value)
+QueryBuilder().ilike(field, value)
 
 Example
 
 QueryBuilder().ilike("title", "%hackathon")
+
+`value` can be %value%, %value, value%
 
 ```
 
 ### order
 
 ```js
-QueryBuilder().order([field], operator[asc, desc])
+QueryBuilder().order(field, operator)
 
 Example
 
 QueryBuilder().order("points", "desc")
+
+`value` can be asc, desc. Default is asc
 
 ```
 
