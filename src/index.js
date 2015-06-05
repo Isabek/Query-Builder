@@ -89,6 +89,14 @@ QueryBuilder.prototype.in = function (field, values) {
     return this;
 };
 
+QueryBuilder.prototype.is = function (field, value) {
+    if (value === undefined) value = null;
+    if (value !== null) value = !!value;
+    this._fields.push(this._operatorGenerate("is", field, value));
+
+    return this;
+};
+
 QueryBuilder.prototype.toString = function () {
 
     var temp = [];

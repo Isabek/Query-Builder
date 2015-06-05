@@ -136,4 +136,31 @@ describe("QueryBuilder", function () {
             expect(q).to.equal("school?id=eq.1");
         });
     });
+
+    describe("#is", function () {
+        it("should add new field with value", function () {
+            var q = new QueryBuilder().is("active", true).toString();
+            expect(q).to.equal("active=is.true");
+        });
+
+        it("should change string to boolean", function () {
+            var q = new QueryBuilder().is("active", "test").toString();
+            expect(q).to.equal("active=is.true");
+        });
+
+        it("should change int to boolean", function () {
+            var q = new QueryBuilder().is("active", 12).toString();
+            expect(q).to.equal("active=is.true");
+        });
+
+        it("should return null", function () {
+            var q = new QueryBuilder().is("active", null).toString();
+            expect(q).to.equal("active=is.null");
+        });
+
+        it("should return null if value empty", function () {
+            var q = new QueryBuilder().is("active").toString();
+            expect(q).to.equal("active=is.null");
+        });
+    });
 });
