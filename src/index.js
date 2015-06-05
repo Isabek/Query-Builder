@@ -105,6 +105,12 @@ QueryBuilder.prototype.isnot = function (field, value) {
     return this;
 };
 
+QueryBuilder.prototype.like = function (field, value) {
+    this._fields.push(this._operatorGenerate("like", field, value));
+
+    return this;
+};
+
 QueryBuilder.prototype.toString = function () {
 
     var temp = [];

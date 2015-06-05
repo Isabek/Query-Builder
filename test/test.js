@@ -190,4 +190,22 @@ describe("QueryBuilder", function () {
             expect(q).to.equal("active=isnot.null");
         });
     });
+
+    describe("#like", function () {
+        it("should add new field with value", function () {
+            var qb = new QueryBuilder().like("title", "javascript");
+            expect(qb.getFields()).to.deep.equal([{
+                operator: 'like',
+                field: {
+                    title: "javascript"
+                }
+            }]);
+        });
+
+        it("should return 'title=like.javascript'", function () {
+            var q = new QueryBuilder().like("title", "javascript").toString();
+
+            expect(q).to.equal("title=like.javascript");
+        });
+    });
 });
