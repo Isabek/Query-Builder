@@ -249,6 +249,14 @@ describe("QueryBuilder", function () {
             expect(q).to.equal("order=id.desc,points.asc");
         });
 
+        it("should be asc by default", function () {
+            var q = QueryBuilder()
+                .order("id")
+                .toString();
+
+            expect(q).to.equal("order=id.asc");
+        });
+
         it("should return 'school?id=in.1,2,3&order=id.desc,points.asc'", function () {
             var q = QueryBuilder()
                 .from("school")

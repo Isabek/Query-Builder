@@ -127,6 +127,7 @@ QueryBuilder.prototype.ilike = function (field, value) {
 };
 
 QueryBuilder.prototype.order = function (field, value) {
+    if (value === undefined) value = "asc";
     this._order.push(this._operatorGenerate("order", field, value));
 
     return this;
