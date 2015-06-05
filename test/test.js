@@ -226,4 +226,38 @@ describe("QueryBuilder", function () {
             expect(q).to.equal("title=ilike.javascript");
         });
     });
+
+    describe("#order", function () {
+        it("should add new field with value", function () {
+            var qb = QueryBuilder()
+                .order("id", "desc");
+
+            expect(qb.getOrder()).to.deep.equal([{
+                operator: 'order',
+                field: {
+                    id: "desc"
+                }
+            }]);
+        });
+
+        it("should return 'order=id.desc,points.asc'", function () {
+            var q = QueryBuilder()
+                .order("id", "desc")
+                .order("points", "asc")
+                .toString();
+
+            expect(q).to.equal("order=id.desc,points.asc");
+        });
+
+        it("should return 'school?id=in.1,2,3&order=id.desc,points.asc'", function () {
+            var q = QueryBuilder()
+                .from("school")
+                .in("id", [1, 2, 3])
+                .order("id", "desc")
+                .order("points", "asc")
+                .toString();
+
+            expect(q).to.equal("school?id=in.1,2,3&order=id.desc,points.asc");
+        });
+    });
 });

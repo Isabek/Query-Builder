@@ -1,6 +1,7 @@
 function QueryBuilder() {
     this._dataset = null;
     this._fields = [];
+    this._order = [];
 
     if (!(this instanceof QueryBuilder))
         return new QueryBuilder();
@@ -38,8 +39,16 @@ QueryBuilder.prototype._fieldToString = function (obj) {
     return this._getFieldKey(obj) + "=" + obj.operator + "." + this._fieldValuesToString(obj);
 };
 
+QueryBuilder.prototype._orderToString = function (obj) {
+    return this._getFieldKey(obj) + "." + this._fieldValuesToString(obj);
+};
+
 QueryBuilder.prototype.getFields = function () {
     return this._fields;
+};
+
+QueryBuilder.prototype.getOrder = function () {
+    return this._order;
 };
 
 QueryBuilder.prototype.from = function (dataset) {
@@ -117,18 +126,31 @@ QueryBuilder.prototype.ilike = function (field, value) {
     return this;
 };
 
+QueryBuilder.prototype.order = function (field, value) {
+    this._order.push(this._operatorGenerate("order", field, value));
+
+    return this;
+};
+
 QueryBuilder.prototype.toString = function () {
 
-    var temp = [];
+    var fields = [], order = [];
 
     this.getFields().reduce(function (prev, curr) {
-        temp.push(this._fieldToString(curr));
+        fields.push(this._fieldToString(curr));
     }.bind(this), {});
+
+    this.getOrder().reduce(function (prev, curr) {
+        order.push(this._orderToString(curr));
+    }.bind(this), {});
+
+    if (order.length)
+        fields.push("order=" + order.join(","));
 
     var query = "";
     if (this._dataset) query = this._dataset;
-    if (this._dataset && temp.length) query = query + "?";
-    query = query + temp.join("&");
+    if (this._dataset && (fields.length || order.length)) query = query + "?";
+    query = query + fields.join("&");
 
     return query;
 };
