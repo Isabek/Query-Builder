@@ -163,4 +163,31 @@ describe("QueryBuilder", function () {
             expect(q).to.equal("active=is.null");
         });
     });
+
+    describe("#isnot", function () {
+        it("should add new field with value", function () {
+            var q = new QueryBuilder().isnot("active", true).toString();
+            expect(q).to.equal("active=isnot.true");
+        });
+
+        it("should change string to boolean", function () {
+            var q = new QueryBuilder().isnot("active", "test").toString();
+            expect(q).to.equal("active=isnot.true");
+        });
+
+        it("should change int to boolean", function () {
+            var q = new QueryBuilder().isnot("active", 12).toString();
+            expect(q).to.equal("active=isnot.true");
+        });
+
+        it("should return null", function () {
+            var q = new QueryBuilder().isnot("active", null).toString();
+            expect(q).to.equal("active=isnot.null");
+        });
+
+        it("should return null if value empty", function () {
+            var q = new QueryBuilder().isnot("active").toString();
+            expect(q).to.equal("active=isnot.null");
+        });
+    });
 });

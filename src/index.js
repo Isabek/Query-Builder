@@ -97,6 +97,14 @@ QueryBuilder.prototype.is = function (field, value) {
     return this;
 };
 
+QueryBuilder.prototype.isnot = function (field, value) {
+    if (value === undefined) value = null;
+    if (value !== null) value = !!value;
+    this._fields.push(this._operatorGenerate("isnot", field, value));
+
+    return this;
+};
+
 QueryBuilder.prototype.toString = function () {
 
     var temp = [];
