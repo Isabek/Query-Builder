@@ -111,6 +111,12 @@ QueryBuilder.prototype.like = function (field, value) {
     return this;
 };
 
+QueryBuilder.prototype.ilike = function (field, value) {
+    this._fields.push(this._operatorGenerate("ilike", field, value));
+
+    return this;
+};
+
 QueryBuilder.prototype.toString = function () {
 
     var temp = [];

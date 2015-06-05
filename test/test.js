@@ -208,4 +208,22 @@ describe("QueryBuilder", function () {
             expect(q).to.equal("title=like.javascript");
         });
     });
+
+    describe("#like", function () {
+        it("should add new field with value", function () {
+            var qb = new QueryBuilder().ilike("title", "javascript");
+            expect(qb.getFields()).to.deep.equal([{
+                operator: 'ilike',
+                field: {
+                    title: "javascript"
+                }
+            }]);
+        });
+
+        it("should return 'title=ilike.javascript'", function () {
+            var q = new QueryBuilder().ilike("title", "javascript").toString();
+
+            expect(q).to.equal("title=ilike.javascript");
+        });
+    });
 });
