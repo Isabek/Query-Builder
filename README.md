@@ -13,6 +13,19 @@ var qb = QueryBuilder();
 
 ##API Methods
 
+### baseURL
+
+Function that selects a `url`
+
+```js
+QueryBuilder().baseURL(url)
+
+Example
+
+QueryBuilder().from("http://example.com")
+
+```
+
 ### from
 
 Function that selects a `dataset`
