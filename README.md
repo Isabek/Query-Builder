@@ -193,6 +193,7 @@ Example
 ```js
 
 var q = QueryBuilder()
+        .baseURL("http://example.com")
         .from("school")
         .eq("id", 12)
         .gte("points", 10)
