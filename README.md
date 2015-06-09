@@ -202,6 +202,6 @@ var q = QueryBuilder()
         .order("points")
         .toString();
 
-Result: school?id=eq.12&points=gte.10&points=lte.30&active=is.true&order=points.asc
+Result: http://example.com/school?id=eq.12&points=gte.10&points=lte.30&active=is.true&order=points.asc
 
 ```
