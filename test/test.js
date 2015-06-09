@@ -268,4 +268,26 @@ describe("QueryBuilder", function () {
             expect(q).to.equal("school?id=in.1,2,3&order=id.desc,points.asc");
         });
     });
+
+    describe("#baseURL", function () {
+        it("should return empty string", function () {
+            var q = QueryBuilder().baseURL("").toString();
+            expect(q).to.equal("");
+        });
+
+        it("should return 'http://example.com'", function () {
+            var q = QueryBuilder().baseURL("http://example.com").toString();
+            expect(q).to.equal("http://example.com");
+        });
+
+        it("should return 'http://example.com/school'", function () {
+            var q = QueryBuilder().baseURL("http://example.com").from("school").toString();
+            expect(q).to.equal("http://example.com/school");
+        });
+
+        it("should return 'http://example.com/school?id=eq.1'", function () {
+            var q = QueryBuilder().baseURL("http://example.com").from("school").eq("id", 1).toString();
+            expect(q).to.equal("http://example.com/school?id=eq.1");
+        });
+    });
 });

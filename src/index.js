@@ -2,6 +2,7 @@ function QueryBuilder() {
     this._dataset = null;
     this._fields = [];
     this._order = [];
+    this._baseURL = null;
 
     if (!(this instanceof QueryBuilder))
         return new QueryBuilder();
@@ -49,6 +50,11 @@ QueryBuilder.prototype.getFields = function () {
 
 QueryBuilder.prototype.getOrder = function () {
     return this._order;
+};
+
+QueryBuilder.prototype.baseURL = function (baseUrl) {
+    this._baseURL = baseUrl;
+    return this;
 };
 
 QueryBuilder.prototype.from = function (dataset) {
@@ -149,7 +155,9 @@ QueryBuilder.prototype.toString = function () {
         fields.push("order=" + order.join(","));
 
     var query = "";
-    if (this._dataset) query = this._dataset;
+    if (this._baseURL) query = query.concat(this._baseURL);
+    if (this._baseURL && this._dataset) query = query.concat("/");
+    if (this._dataset) query = query.concat(this._dataset);
     if (this._dataset && (fields.length || order.length)) query = query + "?";
     query = query + fields.join("&");
 
