@@ -139,20 +139,34 @@ QueryBuilder.prototype.order = function (field, value) {
     return this;
 };
 
-QueryBuilder.prototype.toString = function () {
+QueryBuilder.prototype._createStringFields = function () {
 
-    var fields = [], order = [];
+    var fields = [];
 
     this.getFields().reduce(function (prev, curr) {
         fields.push(this._fieldToString(curr));
     }.bind(this), {});
+    return fields;
+};
+
+QueryBuilder.prototype._createStringOrder = function () {
+
+    var order = [];
 
     this.getOrder().reduce(function (prev, curr) {
         order.push(this._orderToString(curr));
     }.bind(this), {});
 
+    return order;
+};
+
+QueryBuilder.prototype.toString = function () {
+
+    var fields = this._createStringFields(),
+        order = this._createStringOrder();
+
     if (order.length)
-        fields.push("order=" + order.join(","));
+        fields.push("order=".concat(order.join(",")));
 
     var query = "";
     if (this._baseURL) query = query.concat(this._baseURL);
